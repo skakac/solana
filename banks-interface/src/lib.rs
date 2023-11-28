@@ -14,6 +14,11 @@ use {
         transaction::{self, TransactionError, VersionedTransaction},
         transaction_context::TransactionReturnData,
     },
+    solana_accounts_db::{
+        transaction_results::{ 
+            InnerInstructionsList,
+        },
+    },
 };
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -37,6 +42,7 @@ pub struct TransactionSimulationDetails {
     pub logs: Vec<String>,
     pub units_consumed: u64,
     pub return_data: Option<TransactionReturnData>,
+    pub inner_instructions: Option<InnerInstructionsList>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -50,7 +56,7 @@ pub struct TransactionMetadata {
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BanksTransactionResultWithSimulation {
     pub result: Option<transaction::Result<()>>,
-    pub simulation_details: Option<TransactionSimulationDetails>,
+    pub simulation_details: Option<TransactionSimulationDetails>
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
