@@ -428,7 +428,8 @@ pub struct RpcSimulateTransactionResult {
     pub accounts: Option<Vec<Option<UiAccount>>>,
     pub units_consumed: Option<u64>,
     pub return_data: Option<UiTransactionReturnData>,
-    pub inner_instructions: Option<InnerInstructionsList>,
+    pub inner_instructions: InnerInstructionsList,
+    pub test: u32,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]

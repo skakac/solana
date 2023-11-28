@@ -42,7 +42,8 @@ pub struct TransactionSimulationDetails {
     pub logs: Vec<String>,
     pub units_consumed: u64,
     pub return_data: Option<TransactionReturnData>,
-    pub inner_instructions: Option<InnerInstructionsList>,
+    pub inner_instructions: InnerInstructionsList,
+    pub test: u32
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]

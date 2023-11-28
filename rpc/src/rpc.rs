@@ -3763,6 +3763,7 @@ pub mod rpc_full {
                 units_consumed,
                 return_data,
                 inner_instructions,
+                test
             } = bank.simulate_transaction(transaction);
 
             let accounts = if let Some(config_accounts) = config_accounts {
@@ -3814,7 +3815,8 @@ pub mod rpc_full {
                     accounts,
                     units_consumed: Some(units_consumed),
                     return_data: return_data.map(|return_data| return_data.into()),
-                    inner_instructions: inner_instructions,
+                    inner_instructions,
+                    test
                 },
             ))
         }

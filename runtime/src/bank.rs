@@ -338,7 +338,8 @@ pub struct TransactionSimulationResult {
     pub post_simulation_accounts: Vec<TransactionAccount>,
     pub units_consumed: u64,
     pub return_data: Option<TransactionReturnData>,
-    pub inner_instructions: Option<InnerInstructionsList>,
+    pub inner_instructions: InnerInstructionsList,
+    pub test: u32
 }
 pub struct TransactionBalancesSet {
     pub pre_balances: TransactionBalances,
@@ -4478,6 +4479,7 @@ impl Bank {
             units_consumed,
             return_data,
             inner_instructions,
+            test: 1
         }
     }
 

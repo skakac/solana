@@ -195,12 +195,14 @@ fn simulate_transaction(
         units_consumed,
         return_data,
         inner_instructions,
+        test,
     } = bank.simulate_transaction_unchecked(sanitized_transaction);
     let simulation_details = TransactionSimulationDetails {
         logs,
         units_consumed,
         return_data,
         inner_instructions,
+        test
     };
     BanksTransactionResultWithSimulation {
         result: Some(result),

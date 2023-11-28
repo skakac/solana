@@ -377,6 +377,7 @@ pub(crate) mod tests {
             status: Ok(()),
             log_messages: None,
             inner_instructions: None,
+            test: 2,
             durable_nonce_fee: Some(DurableNonceFee::from(
                 &NonceFull::from_partial(
                     rollback_partial,
