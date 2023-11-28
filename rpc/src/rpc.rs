@@ -3675,6 +3675,7 @@ pub mod rpc_full {
                     post_simulation_accounts: _,
                     units_consumed,
                     return_data,
+                    inner_instructions,
                 } = preflight_bank.simulate_transaction(transaction)
                 {
                     match err {
@@ -3693,6 +3694,7 @@ pub mod rpc_full {
                             accounts: None,
                             units_consumed: Some(units_consumed),
                             return_data: return_data.map(|return_data| return_data.into()),
+                            inner_instructions: Some(inner_instructions),
                         },
                     }
                     .into());
@@ -3760,6 +3762,7 @@ pub mod rpc_full {
                 post_simulation_accounts,
                 units_consumed,
                 return_data,
+                inner_instructions,
             } = bank.simulate_transaction(transaction);
 
             let accounts = if let Some(config_accounts) = config_accounts {
@@ -3811,6 +3814,7 @@ pub mod rpc_full {
                     accounts,
                     units_consumed: Some(units_consumed),
                     return_data: return_data.map(|return_data| return_data.into()),
+                    inner_instructions: Some(inner_instructions),
                 },
             ))
         }

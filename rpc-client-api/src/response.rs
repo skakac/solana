@@ -9,6 +9,11 @@ use {
         inflation::Inflation,
         transaction::{Result, TransactionError},
     },
+    solana_accounts_db::{
+        transaction_results::{
+            InnerInstructionsList,
+        },
+    },
     solana_transaction_status::{
         ConfirmedTransactionStatusWithSignature, TransactionConfirmationStatus, UiConfirmedBlock,
         UiTransactionReturnData,
@@ -423,6 +428,7 @@ pub struct RpcSimulateTransactionResult {
     pub accounts: Option<Vec<Option<UiAccount>>>,
     pub units_consumed: Option<u64>,
     pub return_data: Option<UiTransactionReturnData>,
+    pub inner_instructions: Option<InnerInstructionsList>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
