@@ -109,7 +109,7 @@ impl DurableNonceFee {
 /// transaction instruction
 pub type InnerInstructions = Vec<InnerInstruction>;
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 pub struct InnerInstruction {
     pub instruction: CompiledInstruction,
     /// Invocation stack height of this instruction. Instruction stack height
