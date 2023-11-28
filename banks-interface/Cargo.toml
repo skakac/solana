@@ -12,6 +12,7 @@ edition = { workspace = true }
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 solana-sdk = { workspace = true }
+solana-accounts-db = { workspace = true }
 tarpc = { workspace = true, features = ["full"] }
 
 [lib]
