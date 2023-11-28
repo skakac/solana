@@ -98,7 +98,7 @@ use {
         transaction_results::{
             inner_instructions_list_from_instruction_trace, DurableNonceFee,
             TransactionCheckResult, TransactionExecutionDetails, TransactionExecutionResult,
-            TransactionResults,
+            TransactionResults, InnerInstructionsList,
         },
     },
     solana_bpf_loader_program::syscalls::create_program_runtime_environment_v1,
@@ -174,7 +174,7 @@ use {
             TransactionVerificationMode, VersionedTransaction, MAX_TX_ACCOUNT_LOCKS,
         },
         transaction_context::{
-            ExecutionRecord, TransactionAccount, TransactionContext, TransactionReturnData, InnerInstructionsList,
+            ExecutionRecord, TransactionAccount, TransactionContext, TransactionReturnData,
         },
     },
     solana_stake_program::stake_state::{
@@ -333,12 +333,12 @@ pub struct LoadAndExecuteTransactionsOutput {
 }
 
 pub struct TransactionSimulationResult {
-    pub inner_instructions: Option<InnerInstructionsList>,
     pub result: Result<()>,
     pub logs: TransactionLogMessages,
     pub post_simulation_accounts: Vec<TransactionAccount>,
     pub units_consumed: u64,
     pub return_data: Option<TransactionReturnData>,
+    pub inner_instructions: Option<InnerInstructionsList>,
 }
 pub struct TransactionBalancesSet {
     pub pre_balances: TransactionBalances,
@@ -4467,17 +4467,17 @@ impl Bank {
             TransactionExecutionResult::Executed { details, .. } => {
                 (details.log_messages, details.return_data, details.inner_instructions)
             }
-            TransactionExecutionResult::NotExecuted(_) => (None, None),
+            TransactionExecutionResult::NotExecuted(_) => (None, None, None),
         };
         let logs = logs.unwrap_or_default();
 
         TransactionSimulationResult {
-            inner_instructions
             result: flattened_result,
             logs,
             post_simulation_accounts,
             units_consumed,
             return_data,
+            inner_instructions
         }
     }
 
