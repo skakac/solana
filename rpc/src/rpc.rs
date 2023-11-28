@@ -3694,7 +3694,7 @@ pub mod rpc_full {
                             accounts: None,
                             units_consumed: Some(units_consumed),
                             return_data: return_data.map(|return_data| return_data.into()),
-                            inner_instructions: Some(inner_instructions),
+                            inner_instructions: inner_instructions,
                         },
                     }
                     .into());
@@ -3814,7 +3814,7 @@ pub mod rpc_full {
                     accounts,
                     units_consumed: Some(units_consumed),
                     return_data: return_data.map(|return_data| return_data.into()),
-                    inner_instructions: Some(inner_instructions),
+                    inner_instructions: inner_instructions,
                 },
             ))
         }
