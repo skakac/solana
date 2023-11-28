@@ -4477,7 +4477,7 @@ impl Bank {
             post_simulation_accounts,
             units_consumed,
             return_data,
-            inner_instructions
+            inner_instructions,
         }
     }
 
