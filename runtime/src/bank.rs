@@ -174,7 +174,7 @@ use {
             TransactionVerificationMode, VersionedTransaction, MAX_TX_ACCOUNT_LOCKS,
         },
         transaction_context::{
-            ExecutionRecord, TransactionAccount, TransactionContext, TransactionReturnData,
+            ExecutionRecord, TransactionAccount, TransactionContext, TransactionReturnData, InnerInstructionsList,
         },
     },
     solana_stake_program::stake_state::{
@@ -333,6 +333,7 @@ pub struct LoadAndExecuteTransactionsOutput {
 }
 
 pub struct TransactionSimulationResult {
+    pub inner_instructions: Option<InnerInstructionsList>,
     pub result: Result<()>,
     pub logs: TransactionLogMessages,
     pub post_simulation_accounts: Vec<TransactionAccount>,
@@ -4462,15 +4463,16 @@ impl Bank {
 
         let execution_result = execution_results.pop().unwrap();
         let flattened_result = execution_result.flattened_result();
-        let (logs, return_data) = match execution_result {
+        let (logs, return_data, inner_instructions) = match execution_result {
             TransactionExecutionResult::Executed { details, .. } => {
-                (details.log_messages, details.return_data)
+                (details.log_messages, details.return_data, details.inner_instructions)
             }
             TransactionExecutionResult::NotExecuted(_) => (None, None),
         };
         let logs = logs.unwrap_or_default();
 
         TransactionSimulationResult {
+            inner_instructions
             result: flattened_result,
             logs,
             post_simulation_accounts,
